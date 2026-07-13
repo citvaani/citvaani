@@ -30,12 +30,10 @@
   }
   .devanagari{font-family:'Noto Sans Devanagari',sans-serif;}
   h1,h2,h3,.display{font-family:'Fraunces',serif;font-weight:400;letter-spacing:-0.01em;}
-
   a{color:inherit;text-decoration:none;}
-
   ::selection{background:var(--gold-dim);color:var(--bg);}
 
-  /* NAV */
+  /* NAV — one shared component for both "pages" */
   nav{
     position:fixed;top:0;left:0;right:0;z-index:100;
     display:flex;justify-content:space-between;align-items:center;
@@ -44,28 +42,29 @@
   }
   .nav-mark{font-family:'Fraunces',serif;font-size:1.1rem;letter-spacing:0.02em;}
   .nav-links{display:flex;gap:2.2rem;font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;}
-  .nav-links a{opacity:0.75;transition:opacity 0.3s;}
+  .nav-links a{opacity:0.75;transition:opacity 0.45s cubic-bezier(0.4,0,0.2,1);}
   .nav-links a:hover{opacity:1;}
-
+  .nav-links a.current{opacity:1;color:var(--gold);}
   @media(max-width:720px){
     .nav-links{display:none;}
     nav{padding:1.2rem 1.4rem;}
   }
 
-  /* HERO */
+  section{padding:9rem 3rem;max-width:1180px;margin:0 auto;}
+  @media(max-width:720px){section{padding:7rem 1.5rem;}}
+
+  .section-label{
+    font-size:0.78rem;letter-spacing:0.2em;text-transform:uppercase;
+    color:var(--gold);margin-bottom:1.2rem;
+  }
+
+  /* ============ HOME PAGE ============ */
   .hero{
-    position:relative;
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:0 1.5rem;
+    position:relative;height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:0 1.5rem;
   }
-  #hero-canvas{
-    position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;
-  }
+  #hero-canvas{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;}
   .hero-content{position:relative;z-index:2;pointer-events:none;}
   .eyebrow{
     font-size:0.78rem;letter-spacing:0.22em;text-transform:uppercase;
@@ -73,76 +72,36 @@
     display:flex;align-items:center;justify-content:center;gap:0.7rem;
   }
   .eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);}
-  .hero h1{
-    font-size:clamp(3.2rem,9vw,7rem);
-    line-height:0.95;
-    margin-bottom:1.2rem;
-  }
-  .hero .devanagari-title{
-    font-size:clamp(1.6rem,4vw,2.6rem);
-    color:var(--ink-dim);
-    margin-bottom:1.8rem;
-  }
-  .hero p{
-    max-width:34rem;
-    font-size:1.08rem;
-    line-height:1.65;
-    color:var(--ink-dim);
-    font-weight:300;
-  }
+  .hero h1{font-size:clamp(3.2rem,9vw,7rem);line-height:0.95;margin-bottom:1.2rem;}
+  .hero .devanagari-title{font-size:clamp(1.6rem,4vw,2.6rem);color:var(--ink-dim);margin-bottom:1.8rem;}
+  .hero p{max-width:34rem;font-size:1.08rem;line-height:1.65;color:var(--ink-dim);font-weight:300;}
   .scroll-cue{
     position:absolute;bottom:2.4rem;left:50%;transform:translateX(-50%);
     font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-dim);
-    display:flex;flex-direction:column;align-items:center;gap:0.5rem;
-    z-index:2;
+    display:flex;flex-direction:column;align-items:center;gap:0.5rem;z-index:2;
   }
   .scroll-cue .line{width:1px;height:32px;background:linear-gradient(var(--ink-dim),transparent);animation:pulse 2s ease-in-out infinite;}
   @keyframes pulse{0%,100%{opacity:0.3;}50%{opacity:1;}}
 
-  section{padding:9rem 3rem;max-width:1180px;margin:0 auto;}
-  @media(max-width:720px){section{padding:6rem 1.5rem;}}
-
-  .section-label{
-    font-size:0.78rem;letter-spacing:0.2em;text-transform:uppercase;
-    color:var(--gold);margin-bottom:1.2rem;
-  }
-
-  /* NAME SECTION */
-  .name-grid{
-    display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;
-  }
+  .name-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
   @media(max-width:900px){.name-grid{grid-template-columns:1fr;gap:3rem;}}
   .name-grid h2{font-size:clamp(2.2rem,4vw,3.2rem);line-height:1.15;margin-bottom:1.6rem;}
   .name-grid .lede{font-size:1.05rem;line-height:1.75;color:var(--ink-dim);}
-
   .roots{display:flex;flex-direction:column;gap:2rem;}
-  .root-card{
-    border-left:1px solid var(--line);
-    padding-left:1.6rem;
-  }
+  .root-card{border-left:1px solid var(--line);padding-left:1.6rem;}
   .root-card .dev{font-size:2.2rem;color:var(--gold);margin-bottom:0.3rem;}
   .root-card .rom{font-size:1rem;letter-spacing:0.05em;text-transform:uppercase;color:var(--ink);margin-bottom:0.3rem;}
   .root-card .def{font-size:0.92rem;color:var(--ink-dim);line-height:1.5;}
-
-  .pronounce{
-    margin-top:2.2rem;padding-top:2.2rem;border-top:1px solid var(--line);
-    font-size:0.85rem;color:var(--ink-dim);letter-spacing:0.03em;
-  }
+  .pronounce{margin-top:2.2rem;padding-top:2.2rem;border-top:1px solid var(--line);font-size:0.85rem;color:var(--ink-dim);letter-spacing:0.03em;}
   .pronounce b{color:var(--ink);font-weight:500;}
 
-  /* VISION / TWO VOICES */
   .voices-section{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
   .voices-intro{max-width:42rem;margin-bottom:4rem;}
   .voices-intro h2{font-size:clamp(2.2rem,4vw,3rem);margin-bottom:1.4rem;}
   .voices-intro p{font-size:1.05rem;line-height:1.75;color:var(--ink-dim);}
-
-  .voice-pair{
-    display:grid;grid-template-columns:1fr auto 1fr;gap:2.5rem;align-items:stretch;margin-bottom:3rem;
-  }
+  .voice-pair{display:grid;grid-template-columns:1fr auto 1fr;gap:2.5rem;align-items:stretch;margin-bottom:3rem;}
   @media(max-width:800px){.voice-pair{grid-template-columns:1fr;gap:1.2rem;}.voice-pair .vs{display:none;}}
-  .voice-card{
-    padding:2.2rem;border:1px solid var(--line);border-radius:2px;position:relative;
-  }
+  .voice-card{padding:2.2rem;border:1px solid var(--line);border-radius:2px;position:relative;}
   .voice-card.a{border-top:2px solid var(--gold);}
   .voice-card.b{border-top:2px solid var(--teal);}
   .voice-card .tag{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem;}
@@ -151,111 +110,93 @@
   .voice-card h3{font-size:1.3rem;margin-bottom:0.8rem;font-weight:400;}
   .voice-card p{font-size:0.92rem;color:var(--ink-dim);line-height:1.6;}
   .vs{display:flex;align-items:center;justify-content:center;color:var(--ink-dim);font-size:0.8rem;letter-spacing:0.1em;}
-
-  .synthesis{
-    padding:2rem 2.2rem;background:rgba(201,162,75,0.06);border:1px solid var(--gold-dim);border-radius:2px;
-  }
+  .synthesis{padding:2rem 2.2rem;background:rgba(201,162,75,0.06);border:1px solid var(--gold-dim);border-radius:2px;}
   .synthesis .tag{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.7rem;}
   .synthesis h4{font-family:'Fraunces',serif;font-size:1.15rem;font-style:italic;font-weight:400;margin-bottom:0.6rem;}
   .synthesis p{font-size:0.9rem;color:var(--ink-dim);line-height:1.6;}
-
-  .not-everything{
-    margin-top:2.5rem;font-size:0.88rem;color:var(--ink-dim);line-height:1.7;
-    padding-left:1.4rem;border-left:2px solid var(--line);
-  }
+  .not-everything{margin-top:2.5rem;font-size:0.88rem;color:var(--ink-dim);line-height:1.7;padding-left:1.4rem;border-left:2px solid var(--line);}
   .not-everything b{color:var(--ink);font-weight:500;}
 
-  /* CATEGORIES */
   .cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:3rem;}
   @media(max-width:800px){.cat-grid{grid-template-columns:1fr;}}
-  .cat-card{
-    background:var(--bg);padding:2.6rem;transition:background 0.3s;cursor:default;
-    display:flex;flex-direction:column;
-  }
+  .cat-card{background:var(--bg);padding:2.6rem;transition:background 0.3s;cursor:default;display:flex;flex-direction:column;}
   .cat-card:hover{background:var(--bg-soft);}
   .cat-card .num{font-size:0.78rem;color:var(--ink-dim);letter-spacing:0.1em;margin-bottom:1rem;display:block;}
   .cat-card h3{font-size:1.5rem;margin-bottom:0.7rem;font-weight:400;}
   .cat-card p{font-size:0.88rem;color:var(--ink-dim);line-height:1.6;flex-grow:1;}
-  .cat-status{
-    margin-top:1.4rem;font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-dim);
-    opacity:0.6;
-  }
+  .cat-status{margin-top:1.4rem;font-size:0.74rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-dim);opacity:0.6;}
   .cat-status.live{color:var(--gold);opacity:1;font-weight:500;}
   a.cat-card{cursor:pointer;}
   a.cat-card-live{border-top:2px solid var(--gold);}
   a.cat-card-live:hover{background:rgba(240,129,46,0.06);}
-  a.cat-card-live .cat-status.live::after{content:"";}
 
-  /* MONEY PREVIEW — mirrors the finance-post styling on citvaani-money.html so the two pages read as one system */
-  .money-section{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-  .money-intro{
-    display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:3rem;flex-wrap:wrap;
-  }
-  .money-intro h2{font-size:clamp(2.2rem,4vw,3rem);max-width:32rem;}
-  .money-intro .money-link{
-    font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);
-    border-bottom:1px solid var(--gold-dim);padding-bottom:0.2rem;white-space:nowrap;
-    transition:color 0.3s,border-color 0.3s;
-  }
-  .money-intro .money-link:hover{color:var(--ink);border-color:var(--ink-dim);}
-  .money-preview-card{
-    border:1px solid var(--line);border-radius:2px;background:var(--bg);
-    padding:2.6rem clamp(1.5rem,4vw,3rem);
-  }
-  .money-preview-meta{
-    display:flex;align-items:center;gap:0.6rem;font-size:0.8rem;color:var(--ink-dim);
-    text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1.1rem;
-  }
-  .money-tag{
-    background:rgba(240,129,46,0.12);color:var(--gold);padding:0.3rem 0.7rem;border-radius:20px;
-    font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;
-  }
-  .money-preview-card h3{font-size:clamp(1.4rem,2.6vw,1.9rem);margin-bottom:1rem;line-height:1.2;}
-  .money-preview-card p{font-size:0.95rem;color:var(--ink-dim);line-height:1.75;margin-bottom:1.6rem;}
-  .money-preview-card .read-more{
-    font-size:0.82rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--teal);
-    border-bottom:1px solid var(--teal-dim);padding-bottom:0.15rem;transition:color 0.3s,border-color 0.3s;
-  }
-  .money-preview-card .read-more:hover{color:var(--ink);border-color:var(--ink-dim);}
-
-  /* RHYTHM */
   .rhythm-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2.5rem;margin-top:3rem;}
   @media(max-width:800px){.rhythm-grid{grid-template-columns:1fr;}}
   .rhythm-card h3{font-size:1.1rem;margin-bottom:0.7rem;font-weight:400;color:var(--gold);font-family:'Fraunces',serif;font-style:italic;}
   .rhythm-card p{font-size:0.9rem;color:var(--ink-dim);line-height:1.65;}
 
-  /* MASTHEAD */
-  .masthead{
-    display:flex;gap:3rem;align-items:center;margin-top:4rem;padding-top:3rem;border-top:1px solid var(--line);
-    flex-wrap:wrap;
-  }
-  .masthead-role{
-    width:56px;height:56px;border-radius:50%;border:1px solid var(--gold-dim);
-    display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:0.95rem;color:var(--gold);
-    flex-shrink:0;
-  }
+  .masthead{display:flex;gap:3rem;align-items:center;margin-top:4rem;padding-top:3rem;border-top:1px solid var(--line);flex-wrap:wrap;}
+  .masthead-role{width:56px;height:56px;border-radius:50%;border:1px solid var(--gold-dim);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:0.95rem;color:var(--gold);flex-shrink:0;}
   .masthead-text h4{font-size:1rem;font-weight:500;margin-bottom:0.3rem;}
   .masthead-text p{font-size:0.85rem;color:var(--ink-dim);line-height:1.6;max-width:38rem;}
 
-  /* CTA */
   .cta-section{text-align:center;background:var(--bg-soft);border-top:1px solid var(--line);}
   .cta-section h2{font-size:clamp(2rem,4vw,2.8rem);margin-bottom:1.2rem;}
   .cta-section p{color:var(--ink-dim);max-width:32rem;margin:0 auto 2.4rem;line-height:1.7;}
   .cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
-  .btn{
-    padding:0.9rem 1.8rem;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;
-    border:1px solid var(--gold);border-radius:2px;transition:all 0.3s;
-  }
+  .btn{padding:0.9rem 1.8rem;font-size:0.82rem;letter-spacing:0.08em;text-transform:uppercase;border:1px solid var(--gold);border-radius:2px;transition:all 0.3s;}
   .btn.primary{background:var(--gold);color:var(--bg);}
   .btn.primary:hover{background:transparent;color:var(--gold);}
   .btn.ghost{color:var(--ink);border-color:var(--line);}
   .btn.ghost:hover{border-color:var(--ink-dim);}
 
-  footer{
-    padding:3rem;text-align:center;border-top:1px solid var(--line);
-    font-size:0.8rem;color:var(--ink-dim);
+  /* ============ MONEY PAGE ============ */
+  #page-money section{padding-top:9rem;}
+  #page-money section + section{padding-top:0;}
+  .money-hero .eyebrow{
+    font-size:0.78rem;letter-spacing:0.22em;text-transform:uppercase;
+    color:var(--ink-dim);margin-bottom:1.2rem;
+    display:flex;align-items:center;gap:0.7rem;justify-content:flex-start;
   }
+  .money-hero .eyebrow .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);}
+  .money-hero .eyebrow a{color:var(--ink-dim);border-bottom:1px solid var(--line);transition:color 0.45s cubic-bezier(0.4,0,0.2,1),border-color 0.45s cubic-bezier(0.4,0,0.2,1);}
+  .money-hero .eyebrow a:hover{color:var(--gold);border-color:var(--gold-dim);}
+  .money-hero h1{font-size:clamp(2.4rem,6vw,4rem);line-height:1.05;max-width:34rem;margin-bottom:1.4rem;font-family:'Fraunces',serif;}
+  .money-hero p{max-width:40rem;font-size:1.05rem;line-height:1.75;color:var(--ink-dim);}
+
+  #posts{display:flex;flex-direction:column;gap:2.5rem;}
+  .finance-post{
+    border:1px solid var(--line);border-radius:2px;
+    padding:3rem clamp(1.5rem,4vw,3.5rem);background:var(--bg-soft);
+    opacity:0;transform:translateY(18px);
+    transition:opacity 0.7s cubic-bezier(0.16,1,0.3,1),transform 0.7s cubic-bezier(0.16,1,0.3,1);
+  }
+  .finance-post.is-visible{opacity:1;transform:translateY(0);}
+  .finance-post-meta{
+    display:flex;align-items:center;gap:0.6rem;font-size:0.8rem;color:var(--ink-dim);
+    text-transform:uppercase;letter-spacing:0.06em;margin-bottom:1.2rem;
+  }
+  .fp-tag{background:rgba(240,129,46,0.12);color:var(--gold);padding:0.3rem 0.7rem;border-radius:20px;font-size:0.72rem;letter-spacing:0.08em;text-transform:uppercase;}
+  .fp-dot{opacity:0.5;}
+  .finance-post-title{font-size:clamp(1.6rem,3vw,2.2rem);margin-bottom:2.2rem;line-height:1.2;}
+  .fp-sub{color:var(--ink-dim);font-size:0.65em;font-style:italic;display:block;margin-top:0.3rem;}
+  .finance-block{margin-bottom:2.2rem;}
+  .finance-block:last-of-type{margin-bottom:0;}
+  .finance-block h4{font-family:'Fraunces',serif;font-weight:500;font-size:1.05rem;color:var(--teal);margin-bottom:0.7rem;letter-spacing:0.01em;}
+  .finance-block p{font-size:0.95rem;color:var(--ink);opacity:0.9;line-height:1.75;margin-bottom:0.8rem;}
+  .finance-block p:last-child{margin-bottom:0;}
+  .finance-video{padding:1.2rem 1.4rem;border:1px dashed var(--line);border-radius:2px;background:var(--bg);}
+  .finance-takeaway{margin-top:2.6rem;padding-top:2rem;border-top:1px solid var(--line);}
+  .finance-takeaway p{font-family:'Fraunces',serif;font-style:italic;font-size:1.1rem;color:var(--ink);margin-top:0.8rem;line-height:1.6;}
+  .series-note{margin-top:3rem;padding-left:1.4rem;border-left:2px solid var(--line);font-size:0.88rem;color:var(--ink-dim);line-height:1.7;max-width:40rem;}
+  .series-note b{color:var(--ink);font-weight:500;}
+
+  footer{padding:3rem;text-align:center;border-top:1px solid var(--line);font-size:0.8rem;color:var(--ink-dim);}
   footer .fmark{font-family:'Fraunces',serif;color:var(--ink);margin-bottom:0.6rem;font-size:1rem;}
+
+  /* router visibility */
+  [data-page]{display:none;}
+  [data-page].is-active{display:block;}
 
   @media (prefers-reduced-motion: reduce){
     *{animation:none !important;transition:none !important;}
@@ -265,170 +206,358 @@
 <body>
 
 <nav>
-  <div class="nav-mark">CitVaani</div>
+  <a href="/" class="nav-mark" data-link>CitVaani</a>
   <div class="nav-links">
-    <a href="#name">The Name</a>
-    <a href="#vision">Vision</a>
-    <a href="#categories">Categories</a>
-    <a href="#write">Write for Us</a>
+    <a href="/#name" data-link>The Name</a>
+    <a href="/#vision" data-link>Vision</a>
+    <a href="/#categories" data-link>Categories</a>
+    <a href="/money" class="nav-money-link" data-link>Money</a>
+    <a href="/#write" data-link>Write for Us</a>
   </div>
 </nav>
 
-<section class="hero">
-  <canvas id="hero-canvas"></canvas>
-  <div class="hero-content">
-    <div class="eyebrow"><span class="dot"></span> A CitRoha Venture <span class="dot"></span></div>
-    <h1>CitVaani</h1>
-    <div class="devanagari-title devanagari">चित् + वाणी</div>
-    <p>The conscious voice. A space under CitRoha where contested questions about the world get argued honestly, from more than one side — and nobody's forced to pretend there's no tension left.</p>
-  </div>
-  <div class="scroll-cue"><span>Scroll</span><div class="line"></div></div>
-</section>
+<!-- ============ HOME PAGE ============ -->
+<div data-page="home">
 
-<section id="name">
-  <div class="name-grid">
-    <div>
-      <div class="section-label">The Name</div>
-      <h2>Two roots.<br>One conscious voice.</h2>
-      <p class="lede">CitVaani carries CitRoha's own naming logic forward. Where CitRoha means <em>consciousness rising</em>, CitVaani narrows that same awareness into speech — a voice that stays conscious of what it's saying, and of what it's leaving open.</p>
+  <section class="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-content">
+      <div class="eyebrow"><span class="dot"></span> A CitRoha Venture <span class="dot"></span></div>
+      <h1>CitVaani</h1>
+      <div class="devanagari-title devanagari">चित् + वाणी</div>
+      <p>The conscious voice. A space under CitRoha where contested questions about the world get argued honestly, from more than one side — and nobody's forced to pretend there's no tension left.</p>
     </div>
-    <div class="roots">
-      <div class="root-card">
-        <div class="dev devanagari">चित्</div>
-        <div class="rom">Chit</div>
-        <div class="def">Consciousness · Pure Awareness — the same root that opens CitRoha itself.</div>
+    <div class="scroll-cue"><span>Scroll</span><div class="line"></div></div>
+  </section>
+
+  <section id="name">
+    <div class="name-grid">
+      <div>
+        <div class="section-label">The Name</div>
+        <h2>Two roots.<br>One conscious voice.</h2>
+        <p class="lede">CitVaani carries CitRoha's own naming logic forward. Where CitRoha means <em>consciousness rising</em>, CitVaani narrows that same awareness into speech — a voice that stays conscious of what it's saying, and of what it's leaving open.</p>
       </div>
-      <div class="root-card">
-        <div class="dev devanagari">वाणी</div>
-        <div class="rom">Vaani</div>
-        <div class="def">Voice · Speech · Expression — the act of putting awareness into words, for others to hear and answer.</div>
+      <div class="roots">
+        <div class="root-card">
+          <div class="dev devanagari">चित्</div>
+          <div class="rom">Chit</div>
+          <div class="def">Consciousness · Pure Awareness — the same root that opens CitRoha itself.</div>
+        </div>
+        <div class="root-card">
+          <div class="dev devanagari">वाणी</div>
+          <div class="rom">Vaani</div>
+          <div class="def">Voice · Speech · Expression — the act of putting awareness into words, for others to hear and answer.</div>
+        </div>
+        <div class="pronounce">Together: <b>CitVaani</b> — <span class="devanagari">चित्+वाणी</span> — <b>"the conscious voice."</b> Pronounced <i>chit-VAH-nee</i>.</div>
       </div>
-      <div class="pronounce">Together: <b>CitVaani</b> — <span class="devanagari">चित्+वाणी</span> — <b>"the conscious voice."</b> Pronounced <i>chit-VAH-nee</i>.</div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="vision" class="voices-section">
-  <div class="voices-intro">
-    <div class="section-label">The Vision</div>
-    <h2>A neutral ground for genuinely open questions.</h2>
-    <p>CitVaani doesn't take a side. It curates one — sometimes two — and lets the tension stay a tension. We publish opposing voices on the questions that are actually still open, and we're just as deliberate about which questions aren't up for debate at all.</p>
-  </div>
+  <section id="vision" class="voices-section">
+    <div class="voices-intro">
+      <div class="section-label">The Vision</div>
+      <h2>A neutral ground for genuinely open questions.</h2>
+      <p>CitVaani doesn't take a side. It curates one — sometimes two — and lets the tension stay a tension. We publish opposing voices on the questions that are actually still open, and we're just as deliberate about which questions aren't up for debate at all.</p>
+    </div>
 
-  <div class="voice-pair">
-    <div class="voice-card a">
-      <div class="tag">Voice One</div>
-      <h3>The case for</h3>
-      <p>An invited writer makes the strongest version of one position on a genuinely contested question — no strawmanning the other side, just the real argument.</p>
+    <div class="voice-pair">
+      <div class="voice-card a">
+        <div class="tag">Voice One</div>
+        <h3>The case for</h3>
+        <p>An invited writer makes the strongest version of one position on a genuinely contested question — no strawmanning the other side, just the real argument.</p>
+      </div>
+      <div class="vs">VS</div>
+      <div class="voice-card b">
+        <div class="tag">Voice Two</div>
+        <h3>The case against</h3>
+        <p>A second writer, argued in earnest from the opposing view. Neither piece is edited to "win" — CitVaani hosts the debate, it doesn't referee it.</p>
+      </div>
     </div>
-    <div class="vs">VS</div>
-    <div class="voice-card b">
-      <div class="tag">Voice Two</div>
-      <h3>The case against</h3>
-      <p>A second writer, argued in earnest from the opposing view. Neither piece is edited to "win" — CitVaani hosts the debate, it doesn't referee it.</p>
-    </div>
-  </div>
 
-  <div class="synthesis">
-    <div class="tag">The Closing Note</div>
-    <h4>"In Our Voice"</h4>
-    <p>Every point–counterpoint pair ends with a short editorial paragraph — not a verdict, but a naming of what's still unresolved. It's the one place CitVaani's own voice appears, and it never declares a winner.</p>
-  </div>
+    <div class="synthesis">
+      <div class="tag">The Closing Note</div>
+      <h4>"In Our Voice"</h4>
+      <p>Every point–counterpoint pair ends with a short editorial paragraph — not a verdict, but a naming of what's still unresolved. It's the one place CitVaani's own voice appears, and it never declares a winner.</p>
+    </div>
 
-  <div class="not-everything">
-    <b>Not every piece gets a counter-voice.</b> Point–counterpoint is reserved for questions that are genuinely contested. Some subjects — like basic rights and dignity — are treated as settled, and CitVaani won't frame them as two-sided debates just for the sake of "balance."
-  </div>
-</section>
+    <div class="not-everything">
+      <b>Not every piece gets a counter-voice.</b> Point–counterpoint is reserved for questions that are genuinely contested. Some subjects — like basic rights and dignity — are treated as settled, and CitVaani won't frame them as two-sided debates just for the sake of "balance."
+    </div>
+  </section>
 
-<section id="categories">
-  <div class="section-label">Where the Debate Lives</div>
-  <h2 style="font-size:clamp(2.2rem,4vw,3rem);">Six loose channels, not six silos.</h2>
-  <p style="color:var(--ink-dim);max-width:38rem;margin-top:1rem;line-height:1.7;">Every piece is tagged into one, but the best arguments tend to cross the lines anyway. Most channels are still warming up — Finance is live, so start there.</p>
+  <section id="categories">
+    <div class="section-label">Where the Debate Lives</div>
+    <h2 style="font-size:clamp(2.2rem,4vw,3rem);">Six loose channels, not six silos.</h2>
+    <p style="color:var(--ink-dim);max-width:38rem;margin-top:1rem;line-height:1.7;">Every piece is tagged into one, but the best arguments tend to cross the lines anyway. Most channels are still warming up — Finance is live, so start there.</p>
 
-  <div class="cat-grid">
-    <div class="cat-card">
-      <span class="num">01</span>
-      <h3>Environment &amp; Climate</h3>
-      <p>Policy trade-offs, contested science communication, and where CitVana's action agenda meets real disagreement.</p>
-      <span class="cat-status">Coming soon</span>
+    <div class="cat-grid">
+      <div class="cat-card">
+        <span class="num">01</span>
+        <h3>Environment &amp; Climate</h3>
+        <p>Policy trade-offs, contested science communication, and where CitVana's action agenda meets real disagreement.</p>
+        <span class="cat-status">Coming soon</span>
+      </div>
+      <div class="cat-card">
+        <span class="num">02</span>
+        <h3>Tech &amp; AI</h3>
+        <p>What's actually changing, what's overhyped, and the questions we haven't agreed on the answers to yet.</p>
+        <span class="cat-status">Coming soon</span>
+      </div>
+      <div class="cat-card">
+        <span class="num">03</span>
+        <h3>Economy &amp; Work</h3>
+        <p>Growth, labor, inequality — arguments that rarely have a clean, universally satisfying resolution.</p>
+        <span class="cat-status">Coming soon</span>
+      </div>
+      <div class="cat-card">
+        <span class="num">04</span>
+        <h3>Culture &amp; Society</h3>
+        <p>The debates that shape daily life, examined without pretending they're simpler than they are.</p>
+        <span class="cat-status">Coming soon</span>
+      </div>
+      <div class="cat-card">
+        <span class="num">05</span>
+        <h3>Politics &amp; Power</h3>
+        <p>Institutions, governance, and accountability — approached as open questions of process, not partisan scorekeeping.</p>
+        <span class="cat-status">Coming soon</span>
+      </div>
+      <a href="/money" class="cat-card cat-card-live" data-link>
+        <span class="num">06</span>
+        <h3>Finance &amp; Money</h3>
+        <p>Plain-language personal finance for people who've never balanced a budget — no jargon, no judgment.</p>
+        <span class="cat-status live">Live — start here →</span>
+      </a>
     </div>
-    <div class="cat-card">
-      <span class="num">02</span>
-      <h3>Tech &amp; AI</h3>
-      <p>What's actually changing, what's overhyped, and the questions we haven't agreed on the answers to yet.</p>
-      <span class="cat-status">Coming soon</span>
-    </div>
-    <div class="cat-card">
-      <span class="num">03</span>
-      <h3>Economy &amp; Work</h3>
-      <p>Growth, labor, inequality — arguments that rarely have a clean, universally satisfying resolution.</p>
-      <span class="cat-status">Coming soon</span>
-    </div>
-    <div class="cat-card">
-      <span class="num">04</span>
-      <h3>Culture &amp; Society</h3>
-      <p>The debates that shape daily life, examined without pretending they're simpler than they are.</p>
-      <span class="cat-status">Coming soon</span>
-    </div>
-    <div class="cat-card">
-      <span class="num">05</span>
-      <h3>Politics &amp; Power</h3>
-      <p>Institutions, governance, and accountability — approached as open questions of process, not partisan scorekeeping.</p>
-      <span class="cat-status">Coming soon</span>
-    </div>
-    <a href="citvaani-money.html" class="cat-card cat-card-live">
-      <span class="num">06</span>
-      <h3>Finance &amp; Money</h3>
-      <p>Plain-language personal finance for people who've never balanced a budget — no jargon, no judgment.</p>
-      <span class="cat-status live">Live — start here →</span>
-    </a>
-  </div>
-</section>
+  </section>
 
-<section id="write">
-  <div class="section-label">How It's Written</div>
-  <h2 style="font-size:clamp(2.2rem,4vw,3rem);">Invited most of the time. Open once a month.</h2>
+  <section id="write">
+    <div class="section-label">How It's Written</div>
+    <h2 style="font-size:clamp(2.2rem,4vw,3rem);">Invited most of the time. Open once a month.</h2>
 
-  <div class="rhythm-grid">
-    <div class="rhythm-card">
-      <h3>Invited voices</h3>
-      <p>Most pieces come from writers curated per topic — matched deliberately when a question calls for an opposing pair.</p>
+    <div class="rhythm-grid">
+      <div class="rhythm-card">
+        <h3>Invited voices</h3>
+        <p>Most pieces come from writers curated per topic — matched deliberately when a question calls for an opposing pair.</p>
+      </div>
+      <div class="rhythm-card">
+        <h3>Open call, monthly</h3>
+        <p>Once a month, submissions open to anyone. Light-touch review — not for viewpoint, just coherence and relevance.</p>
+      </div>
+      <div class="rhythm-card">
+        <h3>Rolling stream</h3>
+        <p>No fixed weekly schedule. Pieces publish when they're ready, not to fill a slot.</p>
+      </div>
     </div>
-    <div class="rhythm-card">
-      <h3>Open call, monthly</h3>
-      <p>Once a month, submissions open to anyone. Light-touch review — not for viewpoint, just coherence and relevance.</p>
-    </div>
-    <div class="rhythm-card">
-      <h3>Rolling stream</h3>
-      <p>No fixed weekly schedule. Pieces publish when they're ready, not to fill a slot.</p>
-    </div>
-  </div>
 
-  <div class="masthead">
-    <div class="masthead-role devanagari">चित्</div>
-    <div class="masthead-text">
-      <h4>Editor-in-Chief</h4>
-      <p>Curates what counts as a genuinely open question, matches opposing voices, and writes the closing "In Our Voice" note — without ever picking a winner.</p>
+    <div class="masthead">
+      <div class="masthead-role devanagari">चित्</div>
+      <div class="masthead-text">
+        <h4>Editor-in-Chief</h4>
+        <p>Curates what counts as a genuinely open question, matches opposing voices, and writes the closing "In Our Voice" note — without ever picking a winner.</p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="cta-section">
-  <h2>Have a voice worth hearing?</h2>
-  <p>Pitch a piece, propose a counter-argument to something we've published, or just tell us what question you think we're missing.</p>
-  <div class="cta-buttons">
-    <a href="#" class="btn primary">Pitch a Piece</a>
-    <a href="#" class="btn ghost">Read the Latest</a>
-  </div>
-</section>
+  <section class="cta-section">
+    <h2>Have a voice worth hearing?</h2>
+    <p>Pitch a piece, propose a counter-argument to something we've published, or just tell us what question you think we're missing.</p>
+    <div class="cta-buttons">
+      <a href="#" class="btn primary">Pitch a Piece</a>
+      <a href="#" class="btn ghost">Read the Latest</a>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ MONEY PAGE ============ -->
+<div data-page="money">
+
+  <section class="money-hero">
+    <div class="eyebrow"><span class="dot"></span> <a href="/#categories" data-link>CitVaani</a> · Finance &amp; Money · No Point–Counterpoint Here <span class="dot"></span></div>
+    <h1>A finance literacy blog, hiding inside a debate platform.</h1>
+    <p>
+      Not everything on CitVaani needs two sides. Money basics are one of those things — nobody's "against" you understanding your own salary slip. So Finance &amp; Money runs a little differently from the rest of CitVaani: it's a straight-up, day-by-day series that starts from zero and explains personal finance the way a smart friend would — over chai, not in a textbook. No pointless jargon, and definitely no judgment about that one Swiggy order at 2am.
+    </p>
+  </section>
+
+  <section>
+    <div id="posts"><!-- posts render here, generated from POSTS in the script below --></div>
+
+    <div class="series-note">
+      <b>This is an ongoing series.</b> No fixed schedule — new days publish here as they're ready, always starting from zero, always without judgment.
+    </div>
+  </section>
+
+</div>
 
 <footer>
-  <div class="fmark">CitVaani</div>
-  <div>चित् + वाणी · The Conscious Voice · A CitRoha Venture</div>
+  <div class="fmark" id="footer-mark">CitVaani</div>
+  <div id="footer-sub">चित् + वाणी · The Conscious Voice · A CitRoha Venture</div>
 </footer>
 
 <script>
+/* ======================================================================
+   ADD NEW MONEY BLOG DAYS HERE — nowhere else.
+   Copy one object below, change the values, add it to the TOP of the
+   POSTS array (newest first).
+   ====================================================================== */
+  const POSTS = [
+    {
+      day: 1,
+      title: "Income vs. Expenses",
+      subtitle: "(or: Where Did My Salary Go?)",
+      readTime: "4 min read",
+      video: "🎥 What are Income and Expenses? A Beginner's Guide to Understanding Money Management",
+      takeaway: "You can't manage what you don't measure. Income minus expenses is where financial literacy begins — everything else is just Excel with extra steps.",
+      blocks: [
+        {
+          heading: "What it means",
+          paragraphs: [
+            "Income is money coming in — your salary credit on the 1st (or the 7th, if your HR department enjoys suspense), freelance payments, side-hustle earnings, that Diwali bonus, or the ₹500 your cousin <em>finally</em> paid back on UPI after eight months. Expenses are money going out — rent, kirana bills, the metro card, Swiggy, Netflix-Hotstar-Prime (all three, obviously), and the chai you \"need\" to function.",
+            "Sounds obvious, right? But most people who feel \"bad with money\" have never actually written down their income and expenses side by side. The moment you do, patterns show up faster than relatives at a wedding buffet."
+          ]
+        },
+        {
+          heading: "Why it matters",
+          paragraphs: [
+            "Every financial decision — saving, investing, paying off that credit card — depends on one boring truth: you can only build wealth if income is greater than expenses. This is the foundation everything else in this series is built on. Sorry, there's no crypto shortcut for this one."
+          ]
+        },
+        {
+          heading: "A simple example",
+          paragraphs: [
+            "Say you earn ₹50,000/month (income). If your rent, kirana, transport, and subscriptions add up to ₹43,000 (expenses), you have ₹7,000 left over. That ₹7,000 is your starting point for saving, investing, or finally starting that SIP you keep bookmarking. If your expenses were ₹53,000 instead, you'd be ₹3,000 short every month — and that gap has to come from somewhere: a credit card, your savings, or the original interest-free lender — <em>Papa ki jeb</em>."
+          ]
+        },
+        {
+          heading: "Try this today",
+          paragraphs: [
+            "List every source of income you have. Then list every expense from your last bank or UPI statement — yes, including the 2am Swiggy orders and the \"just one More Zomato Gold renewal.\" Don't judge it yet — just see the numbers side by side. Consider it a horoscope, but one that's actually useful."
+          ]
+        }
+      ]
+    }
+
+    // ↑ Add your next entry above this line.
+  ];
+
+  function renderPosts(posts){
+    const container = document.getElementById('posts');
+    if(!container) return;
+    container.innerHTML = posts.map(post => `
+      <article class="finance-post">
+        <div class="finance-post-meta">
+          <span class="fp-tag">Day ${post.day}</span>
+          <span class="fp-dot">·</span>
+          <span>${post.title}</span>
+          <span class="fp-dot">·</span>
+          <span>${post.readTime || ''}</span>
+        </div>
+        <h3 class="finance-post-title">${post.title}${post.subtitle ? ` <span class="fp-sub">${post.subtitle}</span>` : ''}</h3>
+        ${post.blocks.map(block => `
+          <div class="finance-block">
+            <h4>${block.heading}</h4>
+            ${block.paragraphs.map(p => `<p>${p}</p>`).join('')}
+          </div>
+        `).join('')}
+        ${post.video ? `
+          <div class="finance-block finance-video">
+            <h4>Watch to go deeper</h4>
+            <p>${post.video}</p>
+          </div>
+        ` : ''}
+        ${post.takeaway ? `
+          <div class="finance-takeaway">
+            <span class="fp-tag">Today's takeaway</span>
+            <p>${post.takeaway}</p>
+          </div>
+        ` : ''}
+      </article>
+    `).join('');
+  }
+
+  function revealPosts(){
+    const posts = document.querySelectorAll('.finance-post');
+    if ('IntersectionObserver' in window){
+      const reveal = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting){
+            setTimeout(() => entry.target.classList.add('is-visible'), i * 60);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+      posts.forEach(post => reveal.observe(post));
+    } else {
+      posts.forEach(post => post.classList.add('is-visible'));
+    }
+  }
+
+  /* ======================================================================
+     ROUTER — lets one HTML file serve both "/" (home) and "/money"
+     without a second page. Vercel just needs a rewrite (see vercel.json)
+     so any path falls back to this file; the script below decides what
+     to show based on the URL.
+     ====================================================================== */
+  const ROUTES = { '/': 'home', '/money': 'money' };
+
+  function currentRoute(){
+    const path = window.location.pathname.replace(/\/$/, '') || '/';
+    return ROUTES[path] || 'home';
+  }
+
+  function renderRoute(scrollToHash){
+    const page = currentRoute();
+    document.querySelectorAll('[data-page]').forEach(el => {
+      el.classList.toggle('is-active', el.getAttribute('data-page') === page);
+    });
+    document.title = page === 'money'
+      ? 'CitVaani Money — Finance & Money'
+      : 'CitVaani — The Conscious Voice';
+
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('current'));
+    if (page === 'money'){
+      const moneyLink = document.querySelector('.nav-money-link');
+      if (moneyLink) moneyLink.classList.add('current');
+    }
+
+    if (page === 'money'){
+      renderPosts(POSTS);
+      revealPosts();
+    }
+
+    if (scrollToHash && window.location.hash){
+      const target = document.querySelector(window.location.hash);
+      if (target) setTimeout(() => target.scrollIntoView({ behavior: 'smooth' }), 30);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }
+
+  function navigate(url, push){
+    const u = new URL(url, window.location.origin);
+    if (push) history.pushState({}, '', u.pathname + u.hash);
+    else window.location.hash = u.hash;
+    renderRoute(true);
+  }
+
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('[data-link]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('http')) return;
+    e.preventDefault();
+    navigate(href, true);
+  });
+
+  window.addEventListener('popstate', () => renderRoute(true));
+
+  renderRoute(true);
+</script>
+
+<script>
 // 3D hero — two voice-orbs (orange / blue) orbiting and converging, representing two voices in dialogue
+// Only meaningful on the home page, but harmless (and paused) on the money page since the canvas sits behind hidden content.
 const canvas = document.getElementById('hero-canvas');
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 100);
